@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Plus, QrCode, Database, Edit, Trash2 } from 'lucide-react';
+import { Plus, QrCode, Database, Edit, Trash2, LogOut } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { storage } from '../utils/storage';
 import { Form } from '../types';
+import { useAuth } from '../utils/auth';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,6 +19,7 @@ import {
 
 export function Dashboard() {
   const navigate = useNavigate();
+  const { logout } = useAuth();
   const [forms, setForms] = useState<Form[]>([]);
   const [submissionCounts, setSubmissionCounts] = useState<Record<string, number>>({});
   const [deleteFormId, setDeleteFormId] = useState<string | null>(null);
@@ -69,14 +71,23 @@ export function Dashboard() {
             <h1 className="text-3xl md:text-4xl mb-2">Trainer Data Collection</h1>
             <p className="text-gray-600">Create forms, generate QR codes, and collect participant data</p>
           </div>
-          <Button
-            onClick={() => navigate('/form/new')}
-            size="lg"
-            className="w-full md:w-auto"
-          >
-            <Plus className="mr-2 h-5 w-5" />
-            Create New Form
-          </Button>
+          <div className="flex gap-2 w-full md:w-auto">
+            <Button
+              variant="outline"
+              onClick={logout}
+              className="flex-1 md:flex-none"
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              Logout
+            </Button>
+            <Button
+              onClick={() => navigate('/form/new')}
+              className="flex-1 md:flex-none"
+            >
+              <Plus className="mr-2 h-5 w-5" />
+              Create New Form
+            </Button>
+          </div>
         </div>
 
         {forms.length === 0 ? (

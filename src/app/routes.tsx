@@ -1,30 +1,43 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import { Dashboard } from "./pages/Dashboard";
 import { FormBuilder } from "./pages/FormBuilder";
 import { QRCodeView } from "./pages/QRCodeView";
 import { DataViewer } from "./pages/DataViewer";
 import { PublicForm } from "./pages/PublicForm";
+import Login from "./pages/Login";
+import { useAuth } from "./utils/auth";
+import React from "react";
+
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { isAuthenticated } = useAuth();
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  return <>{children}</>;
+};
 
 export const router = createBrowserRouter([
   {
+    path: "/login",
+    Component: Login,
+  },
+  {
     path: "/",
-    Component: Dashboard,
+    element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
   },
   {
     path: "/form/new",
-    Component: FormBuilder,
+    element: <ProtectedRoute><FormBuilder /></ProtectedRoute>,
   },
   {
     path: "/form/edit/:formId",
-    Component: FormBuilder,
+    element: <ProtectedRoute><FormBuilder /></ProtectedRoute>,
   },
   {
     path: "/form/:formId/qr",
-    Component: QRCodeView,
+    element: <ProtectedRoute><QRCodeView /></ProtectedRoute>,
   },
   {
     path: "/form/:formId/data",
-    Component: DataViewer,
+    element: <ProtectedRoute><DataViewer /></ProtectedRoute>,
   },
   {
     path: "/f/:formId",
