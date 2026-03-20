@@ -6,18 +6,19 @@ import { DataViewer } from "./pages/DataViewer";
 import { PublicForm } from "./pages/PublicForm";
 import Login from "./pages/Login";
 import { useAuth } from "./utils/auth";
+import { MainLayout } from "./components/MainLayout";
 import React from "react";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuth();
   if (!isAuthenticated) return <Navigate to="/login" replace />;
-  return <>{children}</>;
+  return <MainLayout>{children}</MainLayout>;
 };
 
 export const router = createBrowserRouter([
   {
     path: "/login",
-    Component: Login,
+    element: <Login />,
   },
   {
     path: "/",
