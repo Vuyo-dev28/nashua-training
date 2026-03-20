@@ -25,7 +25,7 @@ const Login: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (login(username, password)) {
-      navigate('/dashboard');
+      navigate('/');
     } else {
       setError(true);
     }
@@ -73,6 +73,7 @@ const Login: React.FC = () => {
               label="Username"
               variant="outlined"
               margin="normal"
+              autoComplete="username"
               value={username}
               onChange={(e) => {
                 setUsername(e.target.value);
@@ -92,6 +93,7 @@ const Login: React.FC = () => {
               type={showPassword ? 'text' : 'password'}
               variant="outlined"
               margin="normal"
+              autoComplete="current-password"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
