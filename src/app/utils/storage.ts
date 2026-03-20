@@ -13,7 +13,9 @@ export const storage = {
       const snapshot = await get(child(dbRef, FORMS_PATH));
       if (snapshot.exists()) {
         const data = snapshot.val();
-        return Object.keys(data).map(key => ({ id: key, ...data[key] } as Form));
+        if (data && typeof data === 'object') {
+          return Object.keys(data).map(key => ({ id: key, ...data[key] } as Form));
+        }
       }
       return [];
     } catch (error) {
@@ -82,7 +84,9 @@ export const storage = {
       
       if (snapshot.exists()) {
         const data = snapshot.val();
-        return Object.keys(data).map(key => ({ id: key, ...data[key] } as Submission));
+        if (data && typeof data === 'object') {
+          return Object.keys(data).map(key => ({ id: key, ...data[key] } as Submission));
+        }
       }
       return [];
     } catch (error) {

@@ -41,6 +41,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "/f/:formId",
-    Component: PublicForm,
+    element: <PublicForm />,
   },
 ]);
