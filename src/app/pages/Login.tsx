@@ -7,6 +7,7 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Label } from '../components/ui/label';
+import { Checkbox } from '../components/ui/checkbox';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -14,6 +15,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -112,10 +114,25 @@ const Login = () => {
                 </motion.div>
               )}
 
+              <div className="flex items-start space-x-3 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:bg-slate-100/50 transition-colors cursor-pointer group">
+                <Checkbox
+                  id="terms"
+                  checked={acceptedTerms}
+                  onCheckedChange={(checked) => setAcceptedTerms(checked as boolean)}
+                  className="mt-0.5 border-slate-300 data-[state=checked]:bg-indigo-600 data-[state=checked]:border-indigo-600"
+                />
+                <Label 
+                  htmlFor="terms" 
+                  className="cursor-pointer text-sm leading-tight text-slate-600 group-hover:text-slate-900 transition-colors font-medium"
+                >
+                  I accept the <span className="text-indigo-600 font-bold hover:underline">Terms of Use</span> and privacy policy
+                </Label>
+              </div>
+
               <Button
                 type="submit"
-                className="w-full h-12 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 transition-all disabled:opacity-70 mt-2"
-                disabled={isLoading}
+                className="w-full h-12 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                disabled={isLoading || !acceptedTerms}
               >
                 {isLoading ? (
                   <motion.div
@@ -135,6 +152,20 @@ const Login = () => {
             </p>
           </div>
         </Card>
+        
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="mt-8 text-center"
+        >
+          <p className="text-slate-500 text-sm font-medium">
+            Developed by <span className="text-white font-bold">Vuyo Mbanjwa</span>
+          </p>
+          <p className="text-slate-600 text-[10px] uppercase tracking-[0.2em] font-black mt-2">
+            Professional Cloud Solutions
+          </p>
+        </motion.div>
       </motion.div>
     </div>
   );

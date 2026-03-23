@@ -370,6 +370,14 @@ export function PublicForm() {
               </form>
             </CardContent>
           </Card>
+          <div className="mt-12 text-center pb-8">
+            <p className="text-slate-500 text-sm font-medium">
+              Developed by <span className="text-slate-900 font-bold">Vuyo Mbanjwa</span>
+            </p>
+            <p className="text-slate-400 text-[10px] uppercase tracking-[0.2em] font-black mt-1">
+              Professional Cloud Solutions
+            </p>
+          </div>
         </motion.div>
       </div>
     </div>
