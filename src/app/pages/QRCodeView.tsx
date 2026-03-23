@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { ArrowLeft, Download, Copy, Share2, QrCode, ExternalLink, Printer, Info, Check } from 'lucide-react';
+import { ArrowLeft, Download, Copy, Share2, QrCode, ExternalLink, Printer, Info, Check, FileText } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../components/ui/button';
